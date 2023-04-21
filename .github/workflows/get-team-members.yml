@@ -13,6 +13,7 @@ jobs:
       - name: Get team members
         uses: actions/github-script@v4
         with:
+          github-token: ${{ secrets.ORG_TOKEN }}
           script: |
             // Get Team Members
             team = await github.teams.listMembersInOrg({
@@ -20,6 +21,4 @@ jobs:
               team_slug: 'admin'
             })
             console.log(team)
-        env:
-          GITHUB_TOKEN: ${{ secrets.ORG_TOKEN }}
  
