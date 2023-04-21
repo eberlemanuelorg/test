@@ -1,0 +1,36 @@
+on:
+  issue_comment:                                     
+    types: [created, edited]
+
+jobs:
+  comment:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Check issue comment author
+        uses: actions/github-script@v6
+        id: authorized-author
+        with:
+          github-token: ${{ secrets.ORG_TOKEN }}
+          result-encoding: string
+          script: |
+            const teamSlug = "admin"; 
+            const response = await github.rest.teams.listMembersInOrg({
+              org: context.repo.owner,
+              team_slug: teamSlug,
+              per_page: 20
+            });
+            const members = response.data.map(member => member.login);
+            return members.includes(${{ github.actor }})
+            
+      - name: Invite member
+        uses: actions/github-script@v6
+        if: contains(github.event.comment.body, 'approved') && ${{ steps.authorized-author.outputs.result == 'true' }}
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '👋 Ok.. ${{ github.actor }}'
+            })
