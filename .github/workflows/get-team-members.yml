@@ -11,14 +11,16 @@ jobs:
         uses: actions/checkout@v2
       
       - name: Get team members
-        uses: actions/github-script@v4
+        uses: actions/github-script@v6
         with:
           github-token: ${{ secrets.ORG_TOKEN }}
           script: |
-            // Get Team Members
-            team = await github.teams.listMembersInOrg({
-              org: 'eberlemanuelorg',
-              team_slug: 'admin'
-            })
-            console.log(team)
+            const teamSlug = "admin"; // Replace with the slug of your team
+            const response = await github.teams.listMembersInOrg({
+              org: context.repo.owner,
+              team_slug: teamSlug,
+              per_page: 100 // Increase this value if you have more than 100 members in your team
+            });
+            const members = response.data.map(member => member.login);
+            console.log(`Team members: ${members.join(", ")}`);
  
