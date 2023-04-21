@@ -15,7 +15,7 @@ jobs:
         with:
           script: |
             const teamSlug = "<team-slug>"; // Replace with the slug of your team
-            const response = await github.teams.listMembersInOrg({
+            const response = await github.rest.teams.listMembersInOrg({
               org: context.repo.owner,
               team_slug: teamSlug,
               per_page: 100 // Increase this value if you have more than 100 members in your team
