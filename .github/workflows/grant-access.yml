@@ -21,6 +21,7 @@ jobs:
               per_page: 20
             });
             const members = response.data.map(member => member.login);
+            console.log(members)
             return members.includes(${{ github.actor }})
             
       - name: Invite member
