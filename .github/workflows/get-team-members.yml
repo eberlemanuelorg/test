@@ -14,7 +14,7 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
-            const teamSlug = "<team-slug>"; // Replace with the slug of your team
+            const teamSlug = "admin"; // Replace with the slug of your team
             const response = await github.rest.teams.listMembersInOrg({
               org: context.repo.owner,
               team_slug: teamSlug,
