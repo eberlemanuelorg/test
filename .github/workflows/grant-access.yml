@@ -48,8 +48,13 @@ jobs:
            github.rest.orgs.createInvitation({
               org: 'eberlemanuelorg',
               role: 'direct_member',
-              email: 'manu.uu@live.de',
-              team_ids: ['user']
+              email: 'manu.uu@live.de'
+            });
+            
+            github.rest.teams.addOrUpdateMembershipForUserInOrg({
+              org: 'eberlemanuelorg',
+              team_slug: 'user',
+              username: 'ebeman93'
             });
           
         
