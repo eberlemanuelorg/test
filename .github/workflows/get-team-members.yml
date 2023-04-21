@@ -22,4 +22,6 @@ jobs:
             });
             const members = response.data.map(member => member.login);
             console.log(`Team members: ${members.join(", ")}`);
+        env:
+          GITHUB_TOKEN: ${{ secrets.ORG_TOKEN }}
  
