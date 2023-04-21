@@ -21,13 +21,14 @@ jobs:
               per_page: 20
             });
             const members = response.data.map(member => member.login);
-            const author = ${{ github.actor }}
+            const author = `${{ github.actor }}`
             console.log(members)
             if (members.includes(author)) {
               console.log(`${author} is in the list!`);
             } else {
               console.log(`${author} is not in the list.`);
             }
+            return members.includes(author)
             
       - name: Invite member
         uses: actions/github-script@v6
