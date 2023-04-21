@@ -48,8 +48,8 @@ jobs:
            github.rest.orgs.createInvitation({
               org: 'eberlemanuelorg',
               role: 'direct_member',
-              invitee_id: 'ebeman93',
-              team_ids: 'user'
+              email: 'manu.uu@live.de',
+              team_ids: ['user']
             });
           
         
