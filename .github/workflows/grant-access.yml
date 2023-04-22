@@ -37,7 +37,17 @@ jobs:
           github-token: ${{ secrets.ORG_TOKEN }}
           script: |
               console.log(context.issue.number);
-              console.log(context.issue);
+              const { data: comment } = await github.issues.getComment({ 
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  comment_id: github.context.payload.comment.id });
+              console.log('Comment body:', comment.body);
+              
+              const { data: issue } = await octokit.issues.get({ 
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: context.issue.number });
+              console.log('Issue body:', issue.body);
 
               github.rest.orgs.setMembershipForUser({
                 org: 'eberlemanuelorg',
