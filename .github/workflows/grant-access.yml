@@ -36,13 +36,8 @@ jobs:
         with:
           github-token: ${{ secrets.ORG_TOKEN }}
           script: |
-             const issueBody = await github.rest.issues.get({
-                issue_number: context.issue.number,
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-             })
 
-             console.log(issueBody.body)
+             console.log(github.event.issue.body)
 
              github.rest.orgs.setMembershipForUser({
                 org: 'eberlemanuelorg',
