@@ -40,11 +40,8 @@ jobs:
           github-token: ${{ secrets.ORG_TOKEN }}
           script: |
               console.log(context.issue.number);
-              const { data: comment } = await github.rest.issues.getComment({ 
-                  owner: context.repo.owner,
-                  repo: context.repo.repo,
-                  comment_id: github.context.payload.comment.id });
-              console.log('Comment body:', comment.body);
+              const commentBody = `${{ github.event.comment.body }}`
+              console.log('Comment body:', commentBody);
               
               const { data: issue } = await github.rest.issues.get({ 
                   owner: context.repo.owner,
