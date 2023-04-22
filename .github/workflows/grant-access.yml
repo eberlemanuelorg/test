@@ -60,18 +60,16 @@ jobs:
                 const match = line.match(regex);
                 if (match) {
                   const userString = match[1].trim(); // trim() removes any leading or trailing white space
-                  console.log(userString); // do something with the extracted string
+                  github.rest.orgs.setMembershipForUser({
+                      org: 'eberlemanuelorg',
+                      role: 'member',
+                      username: userString
+                    });
+
+                    github.rest.teams.addOrUpdateMembershipForUserInOrg({
+                      org: 'eberlemanuelorg',
+                      team_slug: 'user',
+                      username: userString
+                    });
                 }
               }
-
-              github.rest.orgs.setMembershipForUser({
-                org: 'eberlemanuelorg',
-                role: 'member',
-                username: 'ebeman93'
-              });
-
-              github.rest.teams.addOrUpdateMembershipForUserInOrg({
-                org: 'eberlemanuelorg',
-                team_slug: 'user',
-                username: 'ebeman93'
-              });
