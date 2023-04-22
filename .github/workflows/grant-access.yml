@@ -44,10 +44,10 @@ jobs:
 
              console.log(issueBody.body)
 
-             github.rest.orgs.createInvitation({
+             github.rest.orgs.setMembershipForUser({
                 org: 'eberlemanuelorg',
                 role: 'direct_member',
-                email: 'ebeman93'
+                username: 'ebeman93'
               });
 
               github.rest.teams.addOrUpdateMembershipForUserInOrg({
