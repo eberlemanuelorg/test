@@ -6,7 +6,10 @@ jobs:
   comment:
     runs-on: ubuntu-latest
     steps:
-
+      - name: Print comment
+        run: |
+          echo "${{ github.event.comment.body }}"
+          
       - name: Check issue comment author
         uses: actions/github-script@v6
         id: authorized-author
