@@ -46,7 +46,7 @@ jobs:
 
              github.rest.orgs.setMembershipForUser({
                 org: 'eberlemanuelorg',
-                role: 'direct_member',
+                role: 'member',
                 username: 'ebeman93'
               });
 
