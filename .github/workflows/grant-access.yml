@@ -36,9 +36,8 @@ jobs:
         with:
           github-token: ${{ secrets.ORG_TOKEN }}
           script: |
-              console.log(context.comment.body);
               console.log(context.issue.number);
-              console.log(context.issue.body);
+              console.log(context.issue);
 
               github.rest.orgs.setMembershipForUser({
                 org: 'eberlemanuelorg',
